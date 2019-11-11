@@ -1,0 +1,4 @@
+Sitemap: https://radenmuaz.github.io/sitemapindex.xml
+
+User-Agent: *
+Host: radenmuaz.github.io
