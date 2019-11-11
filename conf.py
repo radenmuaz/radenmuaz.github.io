@@ -155,8 +155,8 @@ NAVIGATION_ALT_LINKS = {
 }
 
 # Name of the theme to use.
-THEME = "bootblog4"
-
+# THEME = "bootblog4"
+THEME = "bootstrap4"
 # Primary color of your theme. This will be used to customize your theme.
 # Must be a HEX value.
 THEME_COLOR = '#5670d4'
@@ -1348,6 +1348,29 @@ WARN_ABOUT_TAG_METADATA = False
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
 GLOBAL_CONTEXT = {}
+# GLOBAL_CONTEXT = {
+#     "JIDN-theme": "theme-base-blue",
+#     # "JIDN": {BLOG_AUTHOR: {   # Or "Given Surname" for alternate authors
+#     #         # "image": "http://example.com/my-image.jpg",
+
+#     #         ## The following are all individually optional
+#     #         "email": BLOG_EMAIL,  # or something else for alternate authors
+#     #         "bio": """Raden Mu'az Mu'im""",
+#     #         "map": "Tokyo, Japan",
+#     #         "social": (
+#     #             "https://twitter.com/radenmuaz",
+#     #             # "https://facebook.com/username",
+#     #             "https://github.com/radenmuaz",
+#     #             # You get the idea
+#     #             )
+#     #         }
+#     #         # Add any needed alternate authors
+#     #         }
+
+#     # "JIDN-theme": "theme-sustom",
+#     # ...
+#     # "JIDN": ...
+# }
 
 # Add functions here and they will be called with template
 # GLOBAL_CONTEXT as parameter when the template is about to be

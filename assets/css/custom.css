@@ -1,0 +1,25 @@
+.theme-custom .sidebar,
+.theme-custom .sidebar-toggle:active,
+.theme-custom #sidebar-checkbox:focus ~ .sidebar-toggle,
+.theme-custom #sidebar-checkbox:checked ~ .sidebar-toggle {
+    background-color: #ccff00;
+}
+.theme-custom .container a,
+.theme-custom .sidebar-toggle,
+.theme-custom .related-posts li a:hover {
+    color: #ccff00;
+}
+.theme-custom .sidebar-toggle:before {
+    background-image: -webkit-linear-gradient(to bottom, #ccff00, #ccff00 20%, #fff 20%, #fff 40%, #ccff00 40%, #ccff00 60%, #fff 60%, #fff 80%, #ccff00 80%, #ccff00 100%);
+    background-image:    -moz-linear-gradient(to bottom, #ccff00, #ccff00 20%, #fff 20%, #fff 40%, #ccff00 40%, #ccff00 60%, #fff 60%, #fff 80%, #ccff00 80%, #ccff00 100%);
+    background-image:     -ms-linear-gradient(to bottom, #ccff00, #ccff00 20%, #fff 20%, #fff 40%, #ccff00 40%, #ccff00 60%, #fff 60%, #fff 80%, #ccff00 80%, #ccff00 100%);
+    background-image:         linear-gradient(to bottom, #ccff00, #ccff00 20%, #fff 20%, #fff 40%, #ccff00 40%, #ccff00 60%, #fff 60%, #fff 80%, #ccff00 80%, #ccff00 100%);
+}
+.theme-custom .sidebar-toggle:active:before,
+.theme-custom #sidebar-checkbox:focus ~ .sidebar-toggle:before,
+.theme-custom #sidebar-checkbox:checked ~ .sidebar-toggle:before {
+    background-image: -webkit-linear-gradient(to bottom, #fff, #fff 20%, #ccff00 20%, #ccff00 40%, #fff 40%, #fff 60%, #ccff00 60%, #ccff00 80%, #fff 80%, #fff 100%);
+    background-image:    -moz-linear-gradient(to bottom, #fff, #fff 20%, #ccff00 20%, #ccff00 40%, #fff 40%, #fff 60%, #ccff00 60%, #ccff00 80%, #fff 80%, #fff 100%);
+    background-image:     -ms-linear-gradient(to bottom, #fff, #fff 20%, #ccff00 20%, #ccff00 40%, #fff 40%, #fff 60%, #ccff00 60%, #ccff00 80%, #fff 80%, #fff 100%);
+    background-image:         linear-gradient(to bottom, #fff, #fff 20%, #ccff00 20%, #ccff00 40%, #fff 40%, #fff 60%, #ccff00 60%, #ccff00 80%, #fff 80%, #fff 100%);
+}
