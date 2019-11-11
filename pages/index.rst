@@ -8,7 +8,7 @@
 .. type: text
 
 
-My name is Raden Mu'az Mu'im( را دين معاذ منعم)
+My name is Raden Mu'az Mu'im(رادين معاذ منعم)
 
 I am Malaysian 🇲🇾, with Javanese ancestry.
 
