@@ -143,7 +143,7 @@ NAVIGATION_LINKS = {
         ("/blog", "Blog"),
         ("/projects", "Projects"),
         ("/cv", "CV"),
-        ("/contact", "Contact"),
+        # ("/contact", "Contact"),
         # ("/archive.html", "Archive"),
         # ("/categories/", "Tags"),
         # ("/rss.xml", "RSS feed"),
