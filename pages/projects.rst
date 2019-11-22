@@ -9,4 +9,4 @@
 
 `mycolab <https://github.com/radenmuaz/mycolab>`_
 ==================================================
-My Google colab notebooks.
+List of notebooks I made with Google Colab
