@@ -13,22 +13,33 @@ K-means clustering is a unsupervised learning to group data points to pre-define
 Here with Pyiodide,
 
 <html>
-    <head>
-        <!-- Recommended meta tags -->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
-    </head>
-    <body>
-        <section class="pyscript">
-            <div id="mpl"></div>
-            <script type="py-editor"
-             config='{"packages":["numpy", "matplotlib"], "sync_main_only": true}'>
+ <head>
+  </head>
+<body>
+    <!-- Container for the plot -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.27.1/full/pyodide.js"></script>
+    <div id="plot-container"></div>
+
+    <script>
+
+async function main() {
+// Initialize Pyodide
+let pyodide = await loadPyodide();
+
+// Load required packages
+await pyodide.loadPackage(["numpy", "matplotlib"]);
+
+// Run Python code
+await pyodide.runPython(`
+from js import document
+# Set up matplotlib to work in the browser
+import matplotlib
+matplotlib.use('module://matplotlib_pyodide.html5_canvas_backend')
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from matplotlib.widgets import Button
-from pyscript import display
 
 def generate_data():
     np.random.seed(1)
@@ -65,6 +76,7 @@ def k_means_with_animation(data, k, max_iters=100, tol=1e-4):
 
 # Main
 if __name__ == "__main__":
+    document.pyodideMplTarget = document.getElementById("plot-container");
     data = generate_data()
     k = 3
     history = k_means_with_animation(data, k)
@@ -94,16 +106,20 @@ if __name__ == "__main__":
             super().__init__(interval=interval)
     ani = FuncAnimation(fig, update, frames=len(history), blit=True,
     event_source=Timer(interval=500), repeat=False)
-
-    from pyscript import document
-
-    animation = document.getElementById("mpl")
-    animation.replaceChildren(
-        document.createRange().createContextualFragment(ani.to_jshtml())
-    )
-    #display(fig, target="mpl")
-            </script>
-          </section>
-  </body>
-
+    fig.canvas.show()
+'''
+    html = ani.to_jshtml()
+    element = document.getElementById(current_target())
+    if element.tagName == "SCRIPT":
+        element = getattr(element, "target", element)
+    element.replaceChildren()
+    script_element = document.createRange().createContextualFragment(html)
+    element.append(script_element)
+'''
+    
+`);
+}
+main();
+    </script>
+</body>
 </html>
