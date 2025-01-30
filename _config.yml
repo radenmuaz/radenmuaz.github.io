@@ -21,7 +21,7 @@ repository               : "radenmuaz/radenmuaz.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  # avatar           : "profile.png"
+  avatar           : "profile.png"
   # name             : "Raden Muhammad Mu'az"
   # bio              : "Short biography for the left-hand sidebar"
   # location         : "Earth"
@@ -57,7 +57,7 @@ author:
   keybase          : # Username
   instagram        : # Username
   lastfm           : # Username
-  linkedin         : # Username
+  linkedin         : radenmuaz
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username
