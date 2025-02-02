@@ -9,7 +9,7 @@ compress_html: false
 Train yourself as a human calculator
 🦾🤖
 {% include base_path %}
-
+{% raw %}
 <html>
 <head>
     <style>
@@ -408,3 +408,4 @@ Train yourself as a human calculator
     </script>
 </body>
 </html>
+{% endraw %}
