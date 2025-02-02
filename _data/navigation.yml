@@ -19,6 +19,9 @@ main:
         
   - title: "Blog"
     url: /blog/
+  
+  - title: "Web apps"
+    url: /webapps/
     
   - title: "CV"
     url: /cv/
