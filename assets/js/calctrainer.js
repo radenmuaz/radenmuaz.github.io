@@ -1,7 +1,7 @@
 const state = {
     level: 1,
     score: 0,
-    timeLeft: 5,
+    timeLeft: 0,
     timer: null,
     currentProblem: null,
     currentAnswer: null,
