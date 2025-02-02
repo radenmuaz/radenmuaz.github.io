@@ -10,7 +10,7 @@ const state = {
 
 const config = {
     problemsPerLevel: 5,
-    correctPoints: 10
+    correctPoints: 1
 };
 
 function getSelectedValues(name) {
