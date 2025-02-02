@@ -8,7 +8,6 @@ redirect_from:
 Train yourself as a human calculator
 🦾🤖
 {% include base_path %}
-{% raw %}
 <html>
 <head>
     <title>Math Typing Game</title>
@@ -408,4 +407,3 @@ Train yourself as a human calculator
     </script>
 </body>
 </html>
-{% endraw %}
