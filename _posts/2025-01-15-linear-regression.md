@@ -144,6 +144,7 @@ Where $$ \mathbf I $$ is identity matrix.
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
     </head>
     <body>
         <section class="pyscript">
