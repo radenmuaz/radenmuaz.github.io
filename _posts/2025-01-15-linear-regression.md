@@ -14,6 +14,10 @@ tags:
 </html> -->
 
 <!-- \newcommand{\unit}[1]{[\mathrm{#1}]} -->
+<html>
+<img class="center" src="{{ site.url }}{{ site.baseurl }}/images/linear_regression.png" width="400">
+<figcaption>Figure 1: Linear regression on 2D dataset</figcaption>
+</html>
 
 ## Introduction
 Linear regression models the relationship between a dependent variable $$y$$ and independent variables $$X$$ as a linear function. It finds coefficients $$\beta$$ that minimize the error between predicted and actual values.
