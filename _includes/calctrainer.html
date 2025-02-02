@@ -126,8 +126,9 @@
     <div class="game-container">
         <div class="config-panel">
             <div class="config-section">
-                <h3>Operations</h3>
+                
                 <div class="checkbox-group">
+                    <h3>Operations:</h3>
                     <label class="checkbox-label">
                         <input type="checkbox" name="ops" value="+" checked> +
                     </label>
@@ -143,41 +144,41 @@
                 </div>
             </div>
             <div class="config-section">
-                <h3>Number of Operands</h3>
                 <div class="checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="radio" name="operands" value="2" checked> 2 Numbers
+                <h3>Operands:</h3>
+                <label class="checkbox-label">
+                        <input type="radio" name="operands" value="2" checked> 2
                     </label>
                     <label class="checkbox-label">
-                        <input type="radio" name="operands" value="3"> 3 Numbers
+                        <input type="radio" name="operands" value="3"> 3
                     </label>
                 </div>
             </div>
             <div class="config-section">
-                <h3>Digit Count</h3>
                 <div class="checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="radio" name="digits" value="1" checked> 1 Digit
+                <h3>Digits:</h3>
+                <label class="checkbox-label">
+                        <input type="radio" name="digits" value="1" checked> 1
                     </label>
                     <label class="checkbox-label">
-                        <input type="radio" name="digits" value="2"> 2 Digits
+                        <input type="radio" name="digits" value="2"> 2
                     </label>
                     <label class="checkbox-label">
-                        <input type="radio" name="digits" value="3"> 3 Digits
+                        <input type="radio" name="digits" value="3"> 3
                     </label>
                 </div>
             </div>
             <div class="config-section">
-                <h3>Time Limit</h3>
                 <div class="checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="radio" name="timeout" value="1"> 1 Second
+                <h3>Time Limit (s)</h3>
+                <label class="checkbox-label">
+                        <input type="radio" name="timeout" value="1"> 1
                     </label>
                     <label class="checkbox-label">
-                        <input type="radio" name="timeout" value="2" checked> 2 Seconds
+                        <input type="radio" name="timeout" value="2" checked> 2
                     </label>
                     <label class="checkbox-label">
-                        <input type="radio" name="timeout" value="3" > 3 Seconds
+                        <input type="radio" name="timeout" value="3" > 3
                     </label>
                 </div>
             </div>
@@ -191,8 +192,8 @@
         <div class="progress-bar">
             <div class="progress-fill" id="progress"></div>
         </div>
-        <div class="problem" id="problem"></div>
-        <input type="number" id="answer" placeholder="Type answer here" autocomplete="off">
+        <div class="problem" id="problem">... ... ... = ?</div>
+        <input type="number" id="answer" placeholder="Answer" autocomplete="off">
         <div class="message" id="message"></div>
     </div>
     <script src="{{ '/assets/js/calctrainer.js' | relative_url }}"></script>
