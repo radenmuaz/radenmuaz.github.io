@@ -22,7 +22,7 @@ Linear regression models the relationship between a dependent variable $$y$$ and
 
 ## Mathematical Formulation
 
-The datasetis follows this equation:
+The dataset is labelled, $$(\mathbf X, \mathbf y)$$, and is assumed to follow this equation:
 
 $$
 \mathbf{y} = \mathbf{X\boldsymbol\beta } + \mathbf{\epsilon}
@@ -89,6 +89,7 @@ $$
 J(\boldsymbol \beta) = \frac{1}{m} \|\mathbf X \boldsymbol \beta - \mathbf y\|^2 + \lambda \|\boldsymbol \beta\|^2
 $$
 
+We multiply by $$ \frac{1}{2} $$ to help cancel extra $$2$$ term when computing gradient of $$\|  \|^2 $$ terms:
 $$
 J(\boldsymbol \beta) = \frac{1}{2m} \|\mathbf X \boldsymbol \beta - \mathbf y\|^2 + \frac{\lambda}{2} \|\boldsymbol \beta\|^2
 $$
@@ -105,7 +106,7 @@ $$
 This gradient can be used in gradient descent to iteratively update $$ \beta $$:
 
 $$
-\beta = \beta - \alpha \nabla_\beta J(\beta)
+\boldsymbol \beta = \boldsymbol \beta - \alpha \nabla_{\boldsymbol \beta} J(\boldsymbol \beta)
 $$
 
 Where $$ \alpha $$ is the learning rate.
