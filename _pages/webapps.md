@@ -1,7 +1,7 @@
 ---
 layout: archive
-title: "CV"
-permalink: /cv/
+title: "Web apps"
+permalink: /webapps/
 author_profile: true
 redirect_from:
   - /games
@@ -9,4 +9,4 @@ redirect_from:
 
 {% include base_path %}
 
-TODO: put static page web apps here.
+[Calctrainer](/webapps/calctrainer): Train yourself as a human calculator 🦾🤖
