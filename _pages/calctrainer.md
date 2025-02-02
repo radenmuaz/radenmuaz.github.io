@@ -4,6 +4,7 @@ title: "Calctrainer"
 permalink: /webapps/calctrainer
 redirect_from:
   - /games/calctrainer
+compress_html: false
 ---
 Train yourself as a human calculator
 🦾🤖
