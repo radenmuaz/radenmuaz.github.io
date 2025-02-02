@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "Calctrainer"
+title: "Calctrainer - Math Typing Game"
 permalink: /webapps/calctrainer
 redirect_from:
   - /games/calctrainer
@@ -9,9 +9,9 @@ compress_html: false
 Train yourself as a human calculator
 🦾🤖
 {% include base_path %}
+
 <html>
 <head>
-    <title>Math Typing Game</title>
     <style>
         body {
             font-family: Arial, sans-serif;

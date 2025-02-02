@@ -9,4 +9,4 @@ redirect_from:
 
 {% include base_path %}
 
-[Calctrainer](/webapps/calctrainer): Train yourself as a human calculator 🦾🤖
+[Calctrainer - Math Typing Game](/webapps/calctrainer): Train yourself as a human calculator 🦾🤖
