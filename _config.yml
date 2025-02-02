@@ -346,10 +346,10 @@ tag_archive:
 # HTML Compression
 # - http://jch.penibelst.de/
 compress_html:
-  # clippings: all
-  clippings: []
+  clippings: all
   ignore:
-    envs: development
+    envs: all
+    # envs: development
 # compress_html:
 #   clippings: []
 #   comments: []
