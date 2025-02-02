@@ -90,6 +90,8 @@ J(\boldsymbol \beta) = \frac{1}{m} \|\mathbf X \boldsymbol \beta - \mathbf y\|^2
 $$
 
 We multiply by $$ \frac{1}{2} $$ to help cancel extra $$2$$ term when computing gradient of $$\|  \|^2 $$ terms:
+
+
 $$
 J(\boldsymbol \beta) = \frac{1}{2m} \|\mathbf X \boldsymbol \beta - \mathbf y\|^2 + \frac{\lambda}{2} \|\boldsymbol \beta\|^2
 $$
@@ -113,14 +115,13 @@ Where $$ \alpha $$ is the learning rate.
 
 ### 2. Closed Form Solution (Normal Equation with Regularization):
 
-Starting from the gradient equation, set to 0:
 Taking the derivative of $$ J(\beta) $$ with respect to $$ \beta $$ and setting it to zero:
 
 $$
 \nabla_{\boldsymbol \beta} J(\boldsymbol \beta) = \frac{1}{m} \mathbf X^\top (\mathbf X \boldsymbol \beta - \mathbf y) + \lambda \boldsymbol \beta = 0
 $$
 
-Solving for $$\boldsymbol \beta $$:
+$$\boldsymbol \beta $$ can be computed in single shot:
 
 $$
 \boldsymbol \beta = (\mathbf X^\top \mathbf X + \lambda \mathbf I)^{-1} \mathbf X^\top \mathbf y
@@ -137,7 +138,6 @@ Where $$ \mathbf I $$ is identity matrix.
 
 <html>
     <head>
-        <!-- Recommended meta tags -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
     </head>
