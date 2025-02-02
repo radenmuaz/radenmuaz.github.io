@@ -9,7 +9,7 @@ compress_html: false
 Train yourself as a human calculator
 🦾🤖
 {% include base_path %}
-{% raw %}
+
 <html>
 <head>
     <style>
@@ -209,7 +209,6 @@ Train yourself as a human calculator
         <input type="number" id="answer" placeholder="Type answer here" autocomplete="off">
         <div class="message" id="message"></div>
     </div>
-
     <script>
         const state = {
             level: 1,
@@ -405,7 +404,7 @@ Train yourself as a human calculator
                 checkAnswer(e.target.value);
             }
         });
+
     </script>
 </body>
 </html>
-{% endraw %}

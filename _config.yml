@@ -129,7 +129,7 @@ yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username               : &twitter
+  username               : radenmuaz
 facebook:
   username               :
   app_id                 :
@@ -345,16 +345,16 @@ tag_archive:
 
 # HTML Compression
 # - http://jch.penibelst.de/
-# compress_html:
-#   clippings: all
-#   ignore:
-#     envs: development
 compress_html:
-  clippings: []
-  comments: []
-  endings: []
+  clippings: all
   ignore:
-    envs: []
-  blanklines: false
-  profile: false
-  startings: []
+    envs: development
+# compress_html:
+#   clippings: []
+#   comments: []
+#   endings: []
+#   ignore:
+#     envs: []
+#   blanklines: false
+#   profile: false
+#   startings: []
