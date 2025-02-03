@@ -1,206 +1,332 @@
-<div class="game">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 60px;
-            min-height: 100vh;
-        }
+<html>
+<head>
+    <title>Math Training Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game">
+        <style>
+            :root {
+                --safe-bottom: env(safe-area-inset-bottom, 0px);
+            }
+            
+            * {
+                box-sizing: border-box;
+                -webkit-tap-highlight-color: transparent;
+            }
 
-        .game-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 130%;
-            max-width: 640px;
-        }
+            body {
+                font-family: 'Rubik', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f2f5;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                touch-action: manipulation;
+            }
 
-        .config-panel {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            text-align: left;
-        }
+            .game-container {
+                flex: 1;
+                background: white;
+                padding: 1rem;
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+            }
 
-        .config-section {
-            margin-bottom: 1rem;
-        }
+            @media (min-width: 768px) {
+                .game-container {
+                    max-width: 640px;
+                    margin: 2rem auto;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                }
+            }
 
-        .config-section h3 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1rem;
-            color: #495057;
-        }
+            .config-panel {
+                background: #f8f9fa;
+                padding: 1rem;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+            }
 
-        .checkbox-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
+            .config-section {
+                margin-bottom: 1rem;
+            }
 
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            cursor: pointer;
-        }
+            .config-section h3 {
+                margin: 0 0 0.5rem 0;
+                font-size: 1rem;
+                color: #495057;
+            }
 
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-        }
+            .checkbox-group {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+                gap: 0.5rem;
+            }
 
-        .problem {
-            font-size: 2.5rem;
-            margin: 2rem 0;
-            min-height: 60px;
-        }
+            .checkbox-label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.25rem;
+                cursor: pointer;
+                background: white;
+                padding: 0.5rem;
+                border-radius: 4px;
+                border: 1px solid #dee2e6;
+                transition: all 0.2s ease;
+            }
 
-        input[type="number"] {
-            font-size: 1.5rem;
-            padding: 0.5rem;
-            width: 250px;
-            text-align: center;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
+            .checkbox-label:active {
+                transform: scale(0.95);
+            }
 
-        input[type="number"]:focus {
-            outline: none;
-            border-color: #007bff;
-        }
+            .stats {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+                background: #f8f9fa;
+                padding: 1rem;
+                border-radius: 8px;
+                font-weight: 500;
+            }
 
-        button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            margin: 0.5rem;
-        }
+            .problem {
+                font-size: 2rem;
+                margin: 1.5rem 0;
+                min-height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 700;
+            }
 
-        button:hover {
-            background: #0056b3;
-        }
+            .input-container {
+                position: relative;
+                margin-bottom: 1rem;
+            }
 
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: #eee;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
+            input[type="text"] {
+                font-size: 1.5rem;
+                padding: 0.75rem;
+                width: 100%;
+                text-align: center;
+                border: 2px solid #dee2e6;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+                font-family: 'Rubik', sans-serif;
+                transition: border-color 0.2s ease;
+            }
 
-        .progress-fill {
-            height: 100%;
-            background: #28a745;
-            transition: width 0.1s linear;
-        }
+            input[type="text"]:focus {
+                outline: none;
+                border-color: #007bff;
+            }
 
-        .message {
-            min-height: 24px;
-            margin: 1rem 0;
-            font-weight: bold;
-        }
+            button {
+                background: #007bff;
+                color: white;
+                border: none;
+                padding: 0.75rem 1rem;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 1rem;
+                margin: 0.5rem 0;
+                width: 100%;
+                font-weight: 500;
+                font-family: 'Rubik', sans-serif;
+                transition: background-color 0.2s ease;
+            }
 
-        .correct { color: #28a745; }
-        .incorrect { color: #dc3545; }
-        .game-over {
-            font-size: 1.5rem;
-            color: #dc3545;
-        }
-    </style>
-    <div class="game-container">
-        <div class="config-panel">
-            <div class="config-section">
-                
-                <div class="checkbox-group">
-                    <h3>Operations:</h3>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="ops" value="+" checked> +
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="ops" value="-" checked> -
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="ops" value="*" checked> *
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="ops" value="/"> /
-                    </label>
+            button:active {
+                transform: scale(0.98);
+            }
+
+            button:hover {
+                background: #0056b3;
+            }
+
+            .progress-bar {
+                width: 100%;
+                height: 8px;
+                background: #eee;
+                border-radius: 4px;
+                overflow: hidden;
+                margin-bottom: 1rem;
+            }
+
+            .progress-fill {
+                height: 100%;
+                background: #28a745;
+                transition: width 0.1s linear;
+            }
+
+            .message {
+                min-height: 24px;
+                margin: 1rem 0;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .correct { color: #28a745; }
+            .incorrect { color: #dc3545; }
+            
+            .game-over {
+                font-size: 1.5rem;
+                color: #dc3545;
+                text-align: center;
+            }
+
+            .ad-space {
+                height: 50px;
+                background: #eee;
+                width: 100%;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-bottom: var(--safe-bottom);
+                z-index: 100;
+            }
+
+            .game-content {
+                padding-bottom: calc(50px + var(--safe-bottom));
+            }
+
+            .preset-buttons {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
+.preset-button {
+    flex: 1;
+    min-width: 0;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    background: transparent;
+    color: #666;
+    border: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.preset-button:hover {
+    background: #e0e0e0;
+}
+
+.preset-button.active {
+    background: #007bff;
+    color: white;
+}
+        </style>
+        <div class="game-container">
+            <div class="game-content">
+                <!-- <div class="preset-buttons"> -->
+                    <!-- <button class="preset-button" onclick="applyPreset('custom')" id="customPreset">Custom</button> -->
+                    <!-- <button class="preset-button active" onclick="applyPreset('easy')" id="easyPreset">Easy</button> -->
+                    <!-- <button class="preset-button" onclick="applyPreset('medium')" id="mediumPreset">Medium</button> -->
+                    <!-- <button class="preset-button" onclick="applyPreset('hard')" id="hardPreset">Hard</button> -->
+                    <!-- <button class="preset-button" onclick="applyPreset('expert')" id="expertPreset">Expert</button> -->
+                <!-- </div> -->
+                <div class="config-panel">
+                            <h3>Operations:</h3>
+                            <div class="config-section">
+                            <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="ops" value="+" checked> +
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="ops" value="-" checked> -
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="ops" value="*" checked> ×
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="ops" value="/"> ÷
+                            </label>
+                        </div>
+                    </div>
+                            <h3>Operands:</h3>
+                            <div class="config-section">
+                            <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="radio" name="operands" value="2" checked> 2
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="radio" name="operands" value="3"> 3
+                            </label>
+                        </div>
+                    </div>
+                            <h3>Digits:</h3>
+                            <div class="config-section">
+                            <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="radio" name="digits" value="1" checked> 1
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="radio" name="digits" value="2"> 2
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="radio" name="digits" value="3"> 3
+                            </label>
+                        </div>
+                    </div>
+                            <h3>Time Limit (s)</h3>
+                            <div class="config-section">
+                            <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="radio" name="timeout" value="3"> 2
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="radio" name="timeout" value="5" checked> 5
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="radio" name="timeout" value="10"> 10
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="radio" name="timeout" value="20"> 20
+                            </label>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin: 0.5rem 0;">Next level every 5 questions</p>
+                    <button onclick="startGame()">Start New Game</button>
                 </div>
-            </div>
-            <div class="config-section">
-                <div class="checkbox-group">
-                <h3>Operands:</h3>
-                <label class="checkbox-label">
-                        <input type="radio" name="operands" value="2" checked> 2
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="radio" name="operands" value="3"> 3
-                    </label>
+                <div class="stats">
+                    <div>Level: <span id="level">1</span></div>
+                    <div>Score: <span id="score">0</span></div>
+                    <div>Time: <span id="timer">-</span>s</div>
                 </div>
-            </div>
-            <div class="config-section">
-                <div class="checkbox-group">
-                <h3>Digits:</h3>
-                <label class="checkbox-label">
-                        <input type="radio" name="digits" value="1" checked> 1
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="radio" name="digits" value="2"> 2
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="radio" name="digits" value="3"> 3
-                    </label>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress"></div>
                 </div>
+                <div class="problem" id="problem">... ... ... = ?</div>
+                <input type="text" 
+                       id="answer" 
+                       placeholder="Answer" 
+                       autocomplete="off"
+                       inputmode="numeric"
+                       pattern="[0-9]*">
+                <div class="message" id="message"></div>
             </div>
-            <div class="config-section">
-                <div class="checkbox-group">
-                <h3>Time Limit (s)</h3>
-                <label class="checkbox-label">
-                        <input type="radio" name="timeout" value="1"> 1
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="radio" name="timeout" value="2" > 2
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="radio" name="timeout" value="3" checked> 3
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="radio" name="timeout" value="4"> 4
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="radio" name="timeout" value="5"> 5
-                    </label>
-                </div>
-            </div>
-            <p>Next level every 5 questions</p>
-            <button onclick="startGame()">Start New Game</button>
         </div>
-        <div class="stats">
-            <div>Level: <span id="level">1</span></div>
-            <div>Score: <span id="score">0</span></div>
-            <div>Time: <span id="timer">-</span>s</div>
+        <div class="ad-space">
+            Ad Space
         </div>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progress"></div>
-        </div>
-        <div class="problem" id="problem">... ... ... = ?</div>
-        <input type="number" id="answer" placeholder="Answer" autocomplete="off">
-        <div class="message" id="message"></div>
     </div>
     <script src="{{ '/assets/js/calctrainer.js' | relative_url }}"></script>
-</div>
+
+</body>
+</html>

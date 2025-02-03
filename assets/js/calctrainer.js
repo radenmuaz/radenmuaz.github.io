@@ -68,14 +68,18 @@ function generateProblem() {
         }
     }
 
+    // Replace multiplication and division symbols with × and ÷
     const problemString = numbers.reduce((acc, num, i) => {
         if (i === 0) return num.toString();
-        return `${acc} ${operators[i-1]} ${num}`;
+        let op = operators[i-1];
+        if (op === '*') op = '×';
+        if (op === '/') op = '÷';
+        return `${acc} ${op} ${num}`;
     }, '');
 
     return {
         problem: `${problemString} = ?`,
-        answer: Math.round(answer) // Round to handle any floating point imprecision
+        answer: Math.round(answer)
     };
 }
 
@@ -149,47 +153,93 @@ function gameOver() {
 }
 
 function validateConfig() {
-    const ops = getSelectedValues('ops');
-    const operands = getSelectedValues('operands');
-    const digits = getSelectedValues('digits');
-    const timeout = getSelectedValues('timeout');
+const ops = getSelectedValues('ops');
+const operands = getSelectedValues('operands');
+const digits = getSelectedValues('digits');
+const timeout = getSelectedValues('timeout');
 
-    if (!ops.length) {
-        alert('Please select at least one operation');
-        return false;
-    }
-    if (!operands.length) {
-        alert('Please select number of operands');
-        return false;
-    }
-    if (!digits.length) {
-        alert('Please select digit count');
-        return false;
-    }
-    if (!timeout.length) {
-        alert('Please select time limit');
-        return false;
-    }
-    return true;
+if (!ops.length) {
+alert('Please select at least one operation');
+return false;
+}
+if (!operands.length) {
+alert('Please select number of operands');
+return false;
+}
+if (!digits.length) {
+alert('Please select digit count');
+return false;
+}
+if (!timeout.length) {
+alert('Please select time limit');
+return false;
+}
+return true;
 }
 
 function startGame() {
-    if (!validateConfig()) return;
-    
-    state.level = 1;
-    state.score = 0;
-    state.gameActive = true;
-    
-    document.getElementById('answer').disabled = false;
-    document.getElementById('answer').value = '';
-    
-    startTimer();
-    nextProblem();
+if (!validateConfig()) return;
+
+state.level = 1;
+state.score = 0;
+state.gameActive = true;
+
+document.getElementById('answer').disabled = false;
+document.getElementById('answer').value = '';
+
+startTimer();
+nextProblem();
 }
 
 document.getElementById('answer').addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') {
-        checkAnswer(e.target.value);
-    }
+if (e.key === 'Enter') {
+checkAnswer(e.target.value);
+}
 });
 
+// // Add touch keyboard support
+// document.getElementById('answer').addEventListener('input', (e) => {
+//     if (e.target.value !== '') {
+//         checkAnswer(e.target.value);
+//     }
+// });
+
+function applyPreset(preset) {
+state.currentPreset = preset;
+
+// Update button states
+document.querySelectorAll('.preset-button').forEach(btn => {
+btn.classList.toggle('active', btn.id === `${preset}Preset`);
+});
+
+if (preset !== 'custom') {
+// Apply preset settings
+const presetConfig = presets[preset];
+applyPresetSettings(presetConfig);
+}
+}
+
+function applyPresetSettings(presetConfig) {
+// Clear all checkboxes first
+document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+cb.checked = false;
+});
+
+// Apply the preset settings
+Object.entries(presetConfig).forEach(([category, values]) => {
+values.forEach(value => {
+    const checkbox = document.querySelector(`input[name="${category}"][value="${value}"]`);
+    if (checkbox) checkbox.checked = true;
+});
+});
+}
+
+// Add event listeners to all checkboxes
+document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+checkbox.addEventListener('change', () => {
+if (state.currentPreset !== 'custom') {
+    state.currentPreset = 'custom';
+    applyPreset('custom');
+}
+});
+});
