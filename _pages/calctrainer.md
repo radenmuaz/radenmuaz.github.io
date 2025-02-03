@@ -5,6 +5,7 @@ permalink: /webapps/calctrainer
 redirect_from:
   - /games/calctrainer
 compress_html: false
+hide_footer: true
 ---
 
 <br>

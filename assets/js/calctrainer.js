@@ -128,7 +128,7 @@ function checkAnswer(userAnswer) {
     
     if (correct) {
         state.score += config.correctPoints;
-        showMessage('Correct!', true);
+        showMessage(`Correct! It is ${state.currentAnswer}`, true);
         
         if (state.score >= state.level * config.problemsPerLevel * config.correctPoints) {
             state.level++;
@@ -197,12 +197,12 @@ checkAnswer(e.target.value);
 }
 });
 
-// // Add touch keyboard support
-// document.getElementById('answer').addEventListener('input', (e) => {
-//     if (e.target.value !== '') {
-//         checkAnswer(e.target.value);
-//     }
-// });
+// Add touch keyboard support
+document.getElementById('answer').addEventListener('input', (e) => {
+    if (e.target.value !== '') {
+        checkAnswer(e.target.value);
+    }
+});
 
 function applyPreset(preset) {
 state.currentPreset = preset;
