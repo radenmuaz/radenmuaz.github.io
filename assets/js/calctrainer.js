@@ -18,10 +18,15 @@ function getSelectedValues(name) {
         .map(cb => cb.value);
 }
 
+// function generateNumber(digitCount) {
+//     const min = Math.pow(10, digitCount - 1);
+//     const max = Math.pow(10, digitCount) - 1;
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+// }
+
 function generateNumber(digitCount) {
-    const min = Math.pow(10, digitCount - 1);
     const max = Math.pow(10, digitCount) - 1;
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max + 1));
 }
 
 function generateProblem() {
