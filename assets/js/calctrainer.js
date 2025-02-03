@@ -124,6 +124,7 @@ function nextProblem() {
 
 function checkAnswer(userAnswer) {
     if (!state.gameActive || userAnswer === '') return;
+    if (userAnswer.length != state.currentAnswer.toString().length) return;
     
     const correct = parseInt(userAnswer) === state.currentAnswer;
     
@@ -235,12 +236,12 @@ values.forEach(value => {
 });
 }
 
-// Add event listeners to all checkboxes
-document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-checkbox.addEventListener('change', () => {
-if (state.currentPreset !== 'custom') {
-    state.currentPreset = 'custom';
-    applyPreset('custom');
-}
-});
-});
+// // Add event listeners to all checkboxes
+// document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+// checkbox.addEventListener('change', () => {
+// if (state.currentPreset !== 'custom') {
+//     state.currentPreset = 'custom';
+//     applyPreset('custom');
+// }
+// });
+// });
