@@ -18,16 +18,16 @@ function getSelectedValues(name) {
         .map(cb => cb.value);
 }
 
-// function generateNumber(digitCount) {
-//     const min = Math.pow(10, digitCount - 1);
-//     const max = Math.pow(10, digitCount) - 1;
-//     return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
-
 function generateNumber(digitCount) {
+    const min = Math.pow(10, digitCount - 1);
     const max = Math.pow(10, digitCount) - 1;
-    return Math.floor(Math.random() * (max + 1));
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+// function generateNumber(digitCount) {
+//     const max = Math.pow(10, digitCount) - 1;
+//     return Math.floor(Math.random() * (max + 1));
+// }
 
 function generateProblem() {
     const operations = getSelectedValues('ops');
@@ -84,7 +84,7 @@ function generateProblem() {
 
     return {
         problemString: problemString,
-        problem: `${problemString} = ?`,
+        problem: `${problemString} = ${answer < 0 ? '-' : ''} ?`,
         answer: Math.round(answer)
     };
 }
@@ -129,8 +129,10 @@ function nextProblem() {
 
 function checkAnswer(userAnswer) {
     if (!state.gameActive || userAnswer === '') return;
-    if (userAnswer.length != state.currentAnswer.toString().length) return;
-    
+    const isNeg = state.currentAnswer < 0; 
+    if (userAnswer.length != state.currentAnswer.toString().length - (isNeg ? 1 : 0)) return;
+    if (isNeg)
+        userAnswer = `-${userAnswer}`;
     const correct = parseInt(userAnswer) === state.currentAnswer;
     
     if (correct) {
