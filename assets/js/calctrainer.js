@@ -78,6 +78,7 @@ function generateProblem() {
     }, '');
 
     return {
+        problemString: problemString,
         problem: `${problemString} = ?`,
         answer: Math.round(answer)
     };
@@ -128,7 +129,7 @@ function checkAnswer(userAnswer) {
     
     if (correct) {
         state.score += config.correctPoints;
-        showMessage(`Correct! It is ${state.currentAnswer}`, true);
+        showMessage(`${state.currentProblem.problemString} = ${state.currentAnswer}`, true);
         
         if (state.score >= state.level * config.problemsPerLevel * config.correctPoints) {
             state.level++;
