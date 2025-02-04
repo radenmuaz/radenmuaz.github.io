@@ -127,9 +127,6 @@ $$
 \mathbf{b} = \frac{1}{m} \sum_{i=1}^m \left(\mathbf{y} - \mathbf{X} \mathbf{W} \right)
 $$
 
----
-
-#### 5.2 Regularization Matrix
 The regularization term applies only to $$ \mathbf{W} $$, not $$ b $$. Define the regularization matrix $$ \tilde{\mathbf{I}} $$:
 
 $$
@@ -142,9 +139,6 @@ $$
 J(\tilde{\mathbf{W}}) = \frac{1}{2m} \|\tilde{\mathbf{X}} \tilde{\mathbf{W}} - \mathbf{y}\|^2 + \frac{\lambda}{2} \tilde{\mathbf{W}}^\top \tilde{\mathbf{I}} \tilde{\mathbf{W}}
 $$
 
----
-
-#### 5.3 Minimize the Cost Function
 Set the gradient of $$ J(\tilde{\mathbf{W}}) $$ with respect to $$ \tilde{\mathbf{W}} $$ to zero:
 
 $$
