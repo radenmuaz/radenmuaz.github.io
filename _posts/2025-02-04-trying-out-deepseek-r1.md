@@ -4,8 +4,9 @@ date: 2025-02-04
 permalink: /blog/trying-out-deepseek-r1/
 tags:
   - machine learning
-  - linear regression
-  - pyscript
+  - llm
+  - deepseek
+  - alignment
 ---
 
 So this model [DeepSeek-R1](https://chat.deepseek.com/) has nice DeepThink feature which have the model monologue in the `<think></think>` tag.
