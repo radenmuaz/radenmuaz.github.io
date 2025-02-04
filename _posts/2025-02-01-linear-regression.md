@@ -1,5 +1,5 @@
 ---
-title: 'Linear Regression (with Pyscript demo)'
+title: 'Linear Regression (with gradient derivation and Pyscript demo)'
 date: 2025-02-01
 permalink: /blog/linear-regression/
 tags:
@@ -29,114 +29,151 @@ Linear regression models the relationship between a dependent variable $$y$$ and
 The dataset is labelled, $$(\mathbf X, \mathbf y)$$, and is assumed to follow this equation:
 
 $$
-\mathbf{y} = \mathbf{X\boldsymbol\beta } + \mathbf{\epsilon}
+\mathbf{y} = \mathbf{X\mathbf W } + \mathbf b + \mathbf \epsilon
 $$
 
 Where:
 - $$\mathbf{y} \in \mathbb{R}^{m}$$: Target vector ($$m$$ is the number of samples)
 - $$\mathbf{X} \in \mathbb{R}^{m \times d}$$: Feature matrix with $$d$$ features (including a column of ones for the intercept)
-- $$\boldsymbol \beta \in \mathbb{R}^{d}$$: Coefficients vector
+- $$\mathbf{b}\in \mathbb{R}^{m}$$: Bias vector
+- $$\mathbf W \in \mathbb{R}^{d}$$: Coefficients vector
 - $$\boldsymbol \epsilon \sim \mathcal{N}(0, \sigma^2 \mathbf I)\in \mathbb{R}^{m}$$: Error term (Gaussian noise with variance $$\sigma^2$$ )
 
 
 The model is given by
 
 $$
-\mathbf{\hat y} = \mathbf X \boldsymbol\beta 
+\hat{\mathbf{y}} = \mathbf{X} \mathbf{W} + \mathbf{b}
 $$
 
 
-The optimal $$\boldsymbol\beta$$ minimizes the Mean Squared Error (MSE):
+<!-- The optimal $$\mathbf W$$ minimizes the Mean Squared Error (MSE):
 
 $$
-\text{MSE}(\boldsymbol\beta) = \frac{1}{m} \|\mathbf X\boldsymbol\beta\ - \mathbf y \|^2
-= \frac{1}{m} (\mathbf X\boldsymbol\beta\ - \mathbf y )^\top(\mathbf X\boldsymbol\beta\ - \mathbf y)
-$$
+\text{MSE}(\mathbf W) = \frac{1}{m} \|\mathbf X\mathbf W\ - \mathbf y \|^2
+= \frac{1}{m} (\mathbf X\mathbf W\ - \mathbf y )^\top(\mathbf X\mathbf W\ - \mathbf y)
+$$ -->
 
 
 ## Training
 
-tl;dr
- 
-- **Gradient equation**:
-  $$
-  \nabla_{\boldsymbol \beta} J(\boldsymbol \beta) = \frac{1}{m} \mathbf X^\top (\mathbf X \boldsymbol \beta - \mathbf y) + \lambda \boldsymbol\beta
-  $$
-
-- **Closed-form solution**:
-  $$
-  \boldsymbol \beta = (\mathbf X^\top \mathbf X + \lambda \mathbf I)^{-1} \mathbf X^\top \mathbf y
-  $$
-
-
-Where $$ \lambda $$ hyperparameter for L2 regularization of $$ \boldsymbol \beta $$ and $$ \mathbf I $$ is identity matrix.
-
-### Derivation
-
-The loss funtion is the MSE:
+The cost function is MSE (Mean Squared Error), with L2 regularization (ridge regression)
 
 $$
-J(\boldsymbol \beta) = \text{MSE}(\boldsymbol \beta) = \frac{1}{m} \|\mathbf X\boldsymbol \beta\ - \mathbf y \|^2
+J(\mathbf{W}, \mathbf{b}) = \frac{1}{2m} \|\mathbf{X} \mathbf{W} + \mathbf{b} - \mathbf{y}\|^2 + \frac{\lambda}{2} \|\mathbf{W}\|^2
 $$
 
-Also, L2 regularization onto $$\boldsymbol \beta$$ can be added to penalize large coefficients in $$\boldsymbol \beta$$. In literature this is known as _ridge regression_.
+### 1. Gradient Equations
+The gradients with respect to $$\mathbf{W}$$ and $$\mathbf{b}$$ are derived as follows:
+
+Gradient with Respect to $$\mathbf{W}$$:
 
 $$
-\lambda\|\boldsymbol \beta\|^2 = \lambda \boldsymbol \beta^\top \boldsymbol \beta
+\nabla_{\mathbf{W}} J(\mathbf{W}, \mathbf{b}) = \frac{1}{m} \mathbf{X}^\top (\mathbf{X} \mathbf{W} + \mathbf{b} - \mathbf{y}) + \lambda \mathbf{W}
 $$
 
-where $$ \lambda $$ is the regularization parameter that controls the strength of the regularization.
-
-Now, the full cost function $$ J(\boldsymbol \beta) $$ becomes:
+ Gradient with Respect to $$\mathbf{b}$$:
 
 $$
-J(\boldsymbol \beta) = \frac{1}{m} \|\mathbf X \boldsymbol \beta - \mathbf y\|^2 + \lambda \|\boldsymbol \beta\|^2
+\nabla_{\mathbf{b}} J(\mathbf{W}, \mathbf{b}) = \frac{1}{m} \sum_{i=1}^m (\mathbf{X} \mathbf{W} + \mathbf{b} - \mathbf{y}) = \frac{1}{m} \mathbf{1}^\top (\mathbf{X} \mathbf{W} + \mathbf{b} - \mathbf{y})
 $$
 
-We multiply by $$ \frac{1}{2} $$ to help cancel extra $$2$$ term when computing gradient of $$\|  \|^2 $$ terms:
+where $$\mathbf{1}$$ is a vector of ones.
+Note $$\mathbf{b}$$ does not appear in the regularization term:
 
-
-$$
-J(\boldsymbol \beta) = \frac{1}{2m} \|\mathbf X \boldsymbol \beta - \mathbf y\|^2 + \frac{\lambda}{2} \|\boldsymbol \beta\|^2
-$$
-
-### 1. Gradient Equation with Regularization:
-
-The derivative of $$ J(\beta) $$ with respect to $$ \beta $$, is the gradient:
+The updates for $$\mathbf{W}$$ and $$\mathbf{b}$$ are:
 
 $$
-\nabla_{\boldsymbol \beta} J(\boldsymbol \beta) = \frac{1}{m} \mathbf X^\top (\mathbf X \boldsymbol \beta - \mathbf y) + \lambda \boldsymbol \beta
+\mathbf{W} = \mathbf{W} - \alpha \nabla_{\mathbf{W}} J(\mathbf{W}, \mathbf{b})
 $$
 
-
-This gradient can be used in gradient descent to iteratively update $$ \beta $$:
-
 $$
-\boldsymbol \beta = \boldsymbol \beta - \alpha \nabla_{\boldsymbol \beta} J(\boldsymbol \beta)
+\mathbf{b} = \mathbf{b} - \alpha \nabla_{\mathbf{b}} J(\mathbf{W}, \mathbf{b})
 $$
 
-Where $$ \alpha $$ is the learning rate.
+### 2. Closed-Form Solution with Bias
 
-### 2. Closed Form Solution (Normal Equation with Regularization):
-
-Taking the derivative of $$ J(\beta) $$ with respect to $$ \beta $$ and setting it to zero:
+To solve for $$\mathbf{W}$$ and $$\mathbf{b}$$ in closed form, we modify the design matrix $$\mathbf{X}$$ to include a column of ones to represent the bias:
 
 $$
-\nabla_{\boldsymbol \beta} J(\boldsymbol \beta) = \frac{1}{m} \mathbf X^\top (\mathbf X \boldsymbol \beta - \mathbf y) + \lambda \boldsymbol \beta = 0
+\tilde{\mathbf{X}} = \begin{bmatrix} \mathbf{X} & \mathbf{1} \end{bmatrix}, \quad \tilde{\mathbf{W}} = \begin{bmatrix} \mathbf{W} \\ \mathbf{b} \end{bmatrix}
 $$
 
-$$\boldsymbol \beta $$ can be computed in single shot:
+The cost function becomes:
 
 $$
-\boldsymbol \beta = (\mathbf X^\top \mathbf X + \lambda \mathbf I)^{-1} \mathbf X^\top \mathbf y
+J(\tilde{\mathbf{W}}) = \frac{1}{2m} \|\tilde{\mathbf{X}} \tilde{\mathbf{W}} - \mathbf{y}\|^2 + \frac{\lambda}{2} \|\mathbf{W}\|^2
 $$
 
-Where $$ \mathbf I $$ is identity matrix.
+In this case, the regularization applies only to $$\mathbf{W}$$ (excluding $$\mathbf{b}$$). This is achieved by constructing a block matrix for the regularization:
 
+$$
+\tilde{\mathbf{R}} = \begin{bmatrix} \lambda \mathbf{I} & \mathbf{0} \\ \mathbf{0}^\top & 0 \end{bmatrix}
+$$
 
+The closed-form solution becomes:
+
+$$
+\tilde{\mathbf{W}} = (\tilde{\mathbf{X}}^\top \tilde{\mathbf{X}} + \tilde{\mathbf{R}})^{-1} \tilde{\mathbf{X}}^\top \mathbf{y}
+$$
+
+Expanding $$\tilde{\mathbf{W}}$$ gives:
+
+$$
+\mathbf{W} = \left( \mathbf{X}^\top \mathbf{X} + \lambda \mathbf{I} \right)^{-1} \mathbf{X}^\top (\mathbf{y} - \mathbf{b})
+$$
+
+$$
+\mathbf{b} = \frac{1}{m} \sum_{i=1}^m \left(\mathbf{y} - \mathbf{X} \mathbf{W} \right)
+$$
+
+---
+
+#### 5.2 Regularization Matrix
+The regularization term applies only to $$ \mathbf{W} $$, not $$ b $$. Define the regularization matrix $$ \tilde{\mathbf{I}} $$:
+
+$$
+\tilde{\mathbf{I}} = \begin{bmatrix} \mathbf{I} & \mathbf{0} \\ \mathbf{0}^\top & 0 \end{bmatrix}
+$$
+
+The regularized cost function becomes:
+
+$$
+J(\tilde{\mathbf{W}}) = \frac{1}{2m} \|\tilde{\mathbf{X}} \tilde{\mathbf{W}} - \mathbf{y}\|^2 + \frac{\lambda}{2} \tilde{\mathbf{W}}^\top \tilde{\mathbf{I}} \tilde{\mathbf{W}}
+$$
+
+---
+
+#### 5.3 Minimize the Cost Function
+Set the gradient of $$ J(\tilde{\mathbf{W}}) $$ with respect to $$ \tilde{\mathbf{W}} $$ to zero:
+
+$$
+\frac{\partial J}{\partial \tilde{\mathbf{W}}} = \frac{1}{m} \tilde{\mathbf{X}}^\top (\tilde{\mathbf{X}} \tilde{\mathbf{W}} - \mathbf{y}) + \lambda \tilde{\mathbf{I}} \tilde{\mathbf{W}} = 0
+$$
+
+Simplify:
+
+$$
+\tilde{\mathbf{X}}^\top \tilde{\mathbf{X}} \tilde{\mathbf{W}} - \tilde{\mathbf{X}}^\top \mathbf{y} + m \lambda \tilde{\mathbf{I}} \tilde{\mathbf{W}} = 0
+$$
+
+Rearrange:
+
+$$
+(\tilde{\mathbf{X}}^\top \tilde{\mathbf{X}} + m \lambda \tilde{\mathbf{I}}) \tilde{\mathbf{W}} = \tilde{\mathbf{X}}^\top \mathbf{y}
+$$
+
+Solve for $$ \tilde{\mathbf{W}} $$:
+
+$$
+\tilde{\mathbf{W}} = (\tilde{\mathbf{X}}^\top \tilde{\mathbf{X}} + m \lambda \tilde{\mathbf{I}})^{-1} \tilde{\mathbf{X}}^\top \mathbf{y}
+$$
+
+This gives the closed-form solution, including both $$ \mathbf{W} $$ and $$ b $$.
 
 ## Python Implementation
 
+Note: only implement gradient descent training, not closed form solution
 
 **[Open in PyScript.com](https://pyscript.com/@radenmuaz/linear-regression/latest)**
 
