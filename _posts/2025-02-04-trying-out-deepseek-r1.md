@@ -47,7 +47,11 @@ I managed to let this run for like 7 minutes...
 
 # 3. Alignment
 
-For anything geopolitical and genocide. The model print out things and hide, maybe not DeepSeek-R1 itself but the online chat service by DeepSeek has filter.
+### current geopolitics and genocide
+
+DeepSeek-R1 can think a bit and answer for things like geopolitics -- Byt the online chat.deepseek.com has filter, it simply prints out the thinking and answer and suddenly hide and apologise.
+
+### religion
 
 For religion, I tested for Islam -- this model is aligned to respect muslims.
 
