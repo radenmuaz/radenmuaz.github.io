@@ -50,7 +50,9 @@ I managed to let this run for like 7 minutes...
 
 ### current geopolitics and genocide
 
-DeepSeek-R1 can think a bit and answer for things like geopolitics -- Byt the online chat.deepseek.com has filter, it simply prints out the thinking and answer and suddenly hide and apologise.
+DeepSeek-R1 can think a bit and answer for things like geopolitics -- But the online chat.deepseek.com service has filter, it simply prints out the thinking and answer and suddenly hide and apologise.
+
+If you download the model and run locally, maybe you can circumvent this problem.
 
 ### religion
 
