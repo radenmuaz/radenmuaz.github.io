@@ -163,7 +163,7 @@ $$
 \tilde{\mathbf{W}} = (\tilde{\mathbf{X}}^\top \tilde{\mathbf{X}} + m \lambda \tilde{\mathbf{I}})^{-1} \tilde{\mathbf{X}}^\top \mathbf{y}
 $$
 
-This gives the closed-form solution, including both $$ \mathbf{W} $$ and $$ b $$.
+This gives the closed-form solution, including both $$ \mathbf{W} $$ and $$ \mathbf b $$.
 
 ## Python Implementation
 
