@@ -2,7 +2,7 @@
 layout: archive
 title: "Web apps"
 permalink: /webapps/
-author_profile: true
+# author_profile: true
 redirect_from:
   - /games
 ---
